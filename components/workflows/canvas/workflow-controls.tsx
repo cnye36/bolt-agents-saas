@@ -3,7 +3,7 @@
 import { Panel } from 'reactflow'
 import { Button } from '@/components/ui/button'
 import { Save } from 'lucide-react'
-import { useToast } from '@/components/ui/use-toast'
+import { useToast } from '@/hooks/use-toast'
 
 export function WorkflowControls() {
   const { toast } = useToast()

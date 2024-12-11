@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Plus } from "lucide-react"
 import { CreateWorkflowDialog } from "@/components/workflows/create-workflow-dialog"
-import { WorkflowCanvas } from '@/components/workflows/workflow-canvas'
+import { WorkflowCanvas } from '@/components/workflows/canvas/workflow-canvas'
 
 export default function WorkflowsPage() {
   const [showCreateDialog, setShowCreateDialog] = useState(false)

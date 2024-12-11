@@ -23,7 +23,7 @@ export function AgentConfigDialog({ agent, open, onOpenChange }: AgentConfigDial
     name: "",
     description: "",
     type: "conversational",
-    model: "gpt-4",
+    model: "gpt-4o-mini",
     temperature: 0.7,
     maxTokens: 1000,
     systemPrompt: "",
@@ -32,7 +32,7 @@ export function AgentConfigDialog({ agent, open, onOpenChange }: AgentConfigDial
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (agent) {
-      updateAgent(agent.id, config)
+      updateAgent(agent.id, config as Partial<AgentConfig>)
     }
     onOpenChange(false)
   }
