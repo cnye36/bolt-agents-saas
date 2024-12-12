@@ -1,21 +1,20 @@
-import { getToken } from "next-auth/jwt"
-import { NextResponse } from "next/server"
-import type { NextRequest } from "next/server"
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+import { getToken } from 'next-auth/jwt'
 
 export async function middleware(request: NextRequest) {
   const token = await getToken({ req: request })
-  const isAuthenticated = !!token
+  const path = request.nextUrl.pathname
 
   // Public paths that don't require authentication
-  const isPublicPath = request.nextUrl.pathname.startsWith("/auth/") ||
-    request.nextUrl.pathname === "/"
+  const publicPaths = ['/', '/auth/login', '/auth/signup']
 
-  if (isPublicPath && isAuthenticated) {
-    return NextResponse.redirect(new URL("/dashboard", request.url))
+  if (!token && !publicPaths.includes(path)) {
+    return NextResponse.redirect(new URL('/auth/login', request.url))
   }
 
-  if (!isPublicPath && !isAuthenticated) {
-    return NextResponse.redirect(new URL("/auth/signin", request.url))
+  if (token && (path === '/auth/login' || path === '/auth/signup')) {
+    return NextResponse.redirect(new URL('/agents', request.url))
   }
 
   return NextResponse.next()
@@ -23,10 +22,11 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/dashboard/:path*",
-    "/agents/:path*",
-    "/workflows/:path*",
-    "/settings/:path*",
-    "/auth/:path*",
-  ],
+    '/',
+    '/agents/:path*',
+    '/workflows/:path*',
+    '/settings/:path*',
+    '/auth/login',
+    '/auth/signup'
+  ]
 }

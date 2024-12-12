@@ -8,7 +8,7 @@ import Navigation from '@/components/navigation'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'AI Orchestrator - No-Code AI Agent Platform',
+  title: 'AI-Automated Agents - No-Code AI Agent Platform',
   description: 'Create and manage AI agents without code',
 }
 

@@ -1,9 +1,19 @@
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { Brain, Workflow, Settings, ChevronRight } from "lucide-react"
+import { Brain, Workflow, Settings, ChevronRight, LogIn, UserPlus } from "lucide-react"
 import Link from "next/link"
+import { getServerSession } from "next-auth"
+import { authOptions } from "@/app/api/auth/[...nextauth]/route"
+import { redirect } from "next/navigation"
 
-export default function Home() {
+export default async function Home() {
+  const session = await getServerSession(authOptions)
+
+  // If user is already logged in, redirect to dashboard or agents page
+  if (session) {
+    redirect("/agents")
+  }
+
   const features = [
     {
       title: "Agent Builder",
@@ -36,14 +46,15 @@ export default function Home() {
         </p>
         <div className="flex justify-center gap-4">
           <Button asChild size="lg">
-            <Link href="/agents">
-              Get Started
-              <ChevronRight className="ml-2 h-4 w-4" />
+            <Link href="/auth/signup">
+              Sign Up
+              <UserPlus className="ml-2 h-4 w-4" />
             </Link>
           </Button>
           <Button variant="outline" size="lg" asChild>
-            <Link href="/documentation">
-              Documentation
+            <Link href="/auth/login">
+              Log In
+              <LogIn className="ml-2 h-4 w-4" />
             </Link>
           </Button>
         </div>
@@ -60,11 +71,8 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
                 <p className="text-muted-foreground mb-4">{feature.description}</p>
-                <Button variant="ghost" asChild>
-                  <Link href={feature.href}>
-                    Learn more
-                    <ChevronRight className="ml-2 h-4 w-4" />
-                  </Link>
+                <Button variant="ghost" className="cursor-default">
+                  <span>Requires Login</span>
                 </Button>
               </Card>
             )
