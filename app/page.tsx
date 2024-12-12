@@ -36,11 +36,7 @@ export default function Home() {
         </p>
         <div className="flex justify-center gap-4">
           <Button asChild size="lg">
-<<<<<<< HEAD
             <Link href="/agents">
-=======
-            <Link href="/agent-builder">
->>>>>>> 1ebf29029c12e6e1a521db30347a2da2a2c55876
               Get Started
               <ChevronRight className="ml-2 h-4 w-4" />
             </Link>

@@ -27,18 +27,9 @@ export function Toaster() {
             {action}
             <ToastClose />
           </Toast>
-<<<<<<< HEAD
-        )
-      })}
-      <ToastViewport />
-    </ToastProvider>
-  )
-}
-=======
         );
       })}
       <ToastViewport />
     </ToastProvider>
   );
 }
->>>>>>> 1ebf29029c12e6e1a521db30347a2da2a2c55876
